@@ -1,5 +1,7 @@
 #!/bin/bash
 
+_CLEANUP_TMP_DIR=""
+
 fetch_latest_release() {
   local repo_owner="$1"
   local repo_name="$2"
@@ -52,10 +54,9 @@ download_and_install_wheel() {
   echo "Latest release: $wheel_name"
   success "Found latest release"
 
-  local tmp_dir
-  tmp_dir=$(mktemp -d)
-  # shellcheck disable=SC2064
-  trap "rm -rf '$tmp_dir'" EXIT
+  _CLEANUP_TMP_DIR=$(mktemp -d)
+  local tmp_dir="$_CLEANUP_TMP_DIR"
+  trap 'rm -rf "$_CLEANUP_TMP_DIR"' EXIT
 
   echo ""
   echo "Downloading wheel..."
