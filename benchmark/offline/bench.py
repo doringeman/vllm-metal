@@ -46,7 +46,7 @@ def main():
 
     # Benchmark using stream_generate with token IDs
     t = time.time()
-    for tokens, max_tokens in zip(prompt_token_ids, output_lens):
+    for tokens, max_tokens in zip(prompt_token_ids, output_lens, strict=True):
         for _ in stream_generate(
             runner.model, runner.tokenizer, tokens, max_tokens=max_tokens
         ):
