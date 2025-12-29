@@ -7,7 +7,6 @@ import gc
 from typing import TYPE_CHECKING, Any
 
 import mlx.core as mx
-import torch
 from vllm.config import VllmConfig
 from vllm.distributed import (
     ensure_model_parallel_initialized,
